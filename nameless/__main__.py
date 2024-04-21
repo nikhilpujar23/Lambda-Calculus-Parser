@@ -1,75 +1,15 @@
-# #!/usr/bin/python
-# # -*- coding: UTF-8 -*-
-
-# """
-# main.py
-
-# @author ejnp
-# """
-
-# from nameless.lexer import Lexer
-# from nameless.parser import Parser, ParserError
-# from nameless.visitors import BetaReduction
-
-
-# def interpret(input_string, print_reductions=False):
-#     """Performs normal order reduction on the given string lambda calculus
-#     expression. Returns the expression's normal form if it exists.
-#     """
-#     lexer = Lexer(input_string)
-#     try:
-#         ast = Parser(lexer).parse()
-#     except ParserError as discrepancy:
-#         print( 'ParseError: ' + discrepancy.message)
-#         return None
-#     normal_form = False
-#     while not normal_form:
-#         reducer = BetaReduction()
-#         reduced_ast = reducer.visit(ast)
-#         normal_form = not reducer.reduced
-#         if print_reductions:
-#             print( unicode(ast))
-#         ast = reduced_ast
-#     return unicode(ast)
-
-
-# def main():
-#     """Begins an interactive lambda calculus interpreter"""
-#     print( "nameless!\nType 'quit' to exit.")
-#     while True:
-#         read = input('> ')
-#         if read == 'quit':
-#             break
-#         if read != '':
-#             interpret(read, print_reductions=True)
-
-
-# if __name__ == '__main__':
-#     main()
-
-#!/usr/bin/python
-# -*- coding: UTF-8 -*-
-
-"""
-main.py
-
-@author ejnp
-"""
-
-from nameless.lexer import Lexer
-from nameless.calculus_parser import Parser, ParserError
-from nameless.visitors import BetaReduction
-
+import streamlit as st
+from lexer import Lexer
+from calculus_parser import Parser, ParserError
+from visitors import BetaReduction
 
 def interpret(input_string, print_reductions=False):
-    """Performs normal order reduction on the given string lambda calculus
-    expression. Returns the expression's normal form if it exists.
-    """
+    """Performs normal order reduction on the given string lambda calculus expression."""
     lexer = Lexer(input_string)
     try:
         ast = Parser(lexer).parse()
     except ParserError as discrepancy:
-        print('ParseError: ' + discrepancy.message)
+        st.error('ParseError: {}'.format(discrepancy))
         return None
     normal_form = False
     while not normal_form:
@@ -77,21 +17,23 @@ def interpret(input_string, print_reductions=False):
         reduced_ast = reducer.visit(ast)
         normal_form = not reducer.reduced
         if print_reductions:
-            print(ast)
+            st.write('Reduction step:', str(ast))
         ast = reduced_ast
     return str(ast)
 
-
 def main():
-    """Begins an interactive lambda calculus interpreter"""
-    print("nameless!\nType 'quit' to exit.")
-    while True:
-        read = input('> ')
-        if read == 'quit':
-            break
-        if read != '':
-            interpret(read, print_reductions=True)
+    st.set_page_config(page_title="Lambda Calculus Interpreter", page_icon=":smiley:")
+    st.title("Lambda Calculus Interpreter")
 
+    # Input field
+    user_input = st.text_area("Enter a lambda calculus expression:")
+
+    # Button to trigger action
+    if st.button("Interpret"):
+        # Call interpret function with user input
+        result = interpret(user_input, print_reductions=True)
+        if result is not None:
+            st.success("Result: {}".format(result))
 
 if __name__ == '__main__':
     main()

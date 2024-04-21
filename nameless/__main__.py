@@ -1,7 +1,7 @@
 from lexer import Lexer
 from calculus_parser import Parser, ParserError
 from visitors import BetaReduction
-
+import streamlit as st
 def interpret(input_string, print_reductions=False):
     """Performs normal order reduction on the given string lambda calculus expression."""
     lexer = Lexer(input_string)
@@ -20,19 +20,20 @@ def interpret(input_string, print_reductions=False):
         ast = reduced_ast
     return str(ast)
 
+
 def main():
-    """Begins an interactive lambda calculus interpreter with support for mathematical functions."""
-    print("Welcome to the Lambda Calculus Interpreter with Extensions!\n"
-          "Type 'quit' to exit.\n"
-          "You can now use 'sin', 'cos', and 'exp' functions, e.g., sin(0.5), cos(x), exp(λx.x).")
-    while True:
-        read = input('> ')
-        if read == 'quit':
-            break
-        if read:
-            result = interpret(read, print_reductions=True)
-            if result is not None:
-                print('Result:', result)
+    st.set_page_config(page_title="Lambda Calculus Interpreter", page_icon=":smiley:")
+    st.title("Lambda Calculus Interpreter")
+
+    # Input field
+    user_input = st.text_area("Enter a lambda calculus expression:")
+
+    # Button to trigger action
+    if st.button("Interpret"):
+        # Call interpret function with user input
+        result = interpret(user_input, print_reductions=True)
+        if result is not None:
+            st.success("Result: {}".format(result))
 
 if __name__ == '__main__':
     main()

@@ -57,7 +57,7 @@ main.py
 """
 
 from nameless.lexer import Lexer
-from nameless.parser import Parser, ParserError
+from nameless.calculus_parser import Parser, ParserError
 from nameless.visitors import BetaReduction
 
 

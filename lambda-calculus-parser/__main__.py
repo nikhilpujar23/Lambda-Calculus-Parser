@@ -2,9 +2,8 @@ from lexer import Lexer
 from calculus_parser import Parser, ParserError
 from visitors import BetaReduction
 import streamlit as st
+
 def interpret(input_string, print_reductions=False):
-    """Performs normal order reduction on the given string lambda calculus expression."""
-    """Performs normal order reduction on the given string lambda calculus expression."""
     lexer = Lexer(input_string)
     try:
         ast = Parser(lexer).parse()

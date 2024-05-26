@@ -1,6 +1,5 @@
-# Nameless!
 
-A lambda calculus interpreter written in Python. Can be used by mathematicians.
+A lambda calculus Parser written in Python. Can be used by mathematicians.
 
 ## Execution
 

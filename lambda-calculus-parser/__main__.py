@@ -15,12 +15,12 @@ members = {
         "GitHub": "https://github.com/nikhilpujar23",
     },
     "Rajan Dhiman": {
-        "LinkedIn": "https://www.linkedin.com/in/rajan/",
-        "GitHub": "https://github.com/rajan",
+        "LinkedIn": "https://www.linkedin.com/in/rajan-dhiman-2a070920b/",
+        "GitHub": "https://github.com/Rajancoding597",
     },
     "Rajveer Hayer": {
-        "LinkedIn": "https://www.linkedin.com/in/rajveer/",
-        "GitHub": "https://github.com/rajveer",
+        "LinkedIn": "https://www.linkedin.com/in/rajveer-singh-021b63201/ ",
+        "GitHub": "https://github.com/RajveerHayer09",
     }
 }
 
